@@ -1,11 +1,11 @@
-import './App.css';
+import '@/App.css';
 import '@mantine/core/styles.css';
 
 import { MantineProvider } from '@mantine/core';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import React, { useState } from 'react';
 
-import logo from './logo.svg';
+import { Header } from '@/components/Header/Header';
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -15,16 +15,15 @@ const queryClient = new QueryClient({
     },
   },
 });
-
 function App() {
   const [count, setCount] = useState(0);
 
   return (
     <MantineProvider>
       <QueryClientProvider client={queryClient}>
+        <Header />
         <div className="App">
           <header className="App-header">
-            <img src={logo} className="App-logo" alt="logo" />
             <p className="header">
               🚀 Vite + React + Typescript 🤘 & <br />
               Eslint 🔥+ Prettier
