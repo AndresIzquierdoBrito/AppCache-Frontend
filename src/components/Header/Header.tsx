@@ -3,7 +3,7 @@ import { useDisclosure } from '@mantine/hooks';
 import { MantineLogo } from '@mantinex/mantine-logo';
 import { useState } from 'react';
 
-import classes from '@/components/Header/Header.module.css';
+import classes from './Header.module.css';
 
 const links = [
   { link: '/about', label: 'Features' },

@@ -4,8 +4,10 @@ import '@mantine/core/styles.css';
 import { MantineProvider } from '@mantine/core';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import React, { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 
 import { Header } from '@/components/Header/Header';
+import { LocaleSwitcher } from '@/components/LocaleSwitcher/LocaleSwitcher';
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -17,17 +19,15 @@ const queryClient = new QueryClient({
 });
 function App() {
   const [count, setCount] = useState(0);
-
+  const { t } = useTranslation();
   return (
     <MantineProvider>
       <QueryClientProvider client={queryClient}>
         <Header />
+        <LocaleSwitcher />
         <div className="App">
           <header className="App-header">
-            <p className="header">
-              🚀 Vite + React + Typescript 🤘 & <br />
-              Eslint 🔥+ Prettier
-            </p>
+            <p className="header">{t('welcome')}</p>
 
             <div className="body">
               <button onClick={() => setCount((count) => count + 1)}>
