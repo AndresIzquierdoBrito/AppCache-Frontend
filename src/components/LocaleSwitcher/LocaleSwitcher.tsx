@@ -3,8 +3,8 @@ import { IconChevronDown } from '@tabler/icons-react';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
+import english from '@/assets/images/flags/en.png';
 import spanish from '@/assets/images/flags/es.png';
-import english from '@/assets/images/flags/us.png';
 
 import classes from './LocaleSwitcher.module.css';
 
