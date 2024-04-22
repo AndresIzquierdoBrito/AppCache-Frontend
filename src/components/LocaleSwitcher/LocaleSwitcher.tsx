@@ -10,7 +10,7 @@ import classes from './LocaleSwitcher.module.css';
 
 const data = [
   { code: 'en', label: 'English', image: english },
-  { code: 'es', label: 'Spanish', image: spanish },
+  { code: 'es', label: 'Español', image: spanish },
 ];
 
 export function LocaleSwitcher() {
