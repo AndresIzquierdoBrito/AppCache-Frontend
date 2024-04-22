@@ -28,6 +28,7 @@ function App() {
         <div className="App">
           <header className="App-header">
             <p className="header">{t('welcome')}</p>
+            <p className="header">{t('logout')}</p>
 
             <div className="body">
               <button onClick={() => setCount((count) => count + 1)}>

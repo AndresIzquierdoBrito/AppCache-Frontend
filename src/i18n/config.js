@@ -7,8 +7,8 @@ import enTranslation from '@/i18n/locales/en/translation.json';
 import esTranslation from '@/i18n/locales/es/translation.json';
 
 export const supportedLanguages = {
-  en: 'Engish',
-  es: 'Espanol',
+  en: 'English',
+  es: 'Español',
 };
 
 i18n
