@@ -16,7 +16,6 @@ const data = [
 export function LocaleSwitcher() {
   const [opened, setOpened] = useState(false);
   const { i18n } = useTranslation();
-  console.log('Current language: ' + i18n.language);
 
   const [selected, setSelected] = useState(
     data.find((item) => item.code === i18n.language)
@@ -27,7 +26,6 @@ export function LocaleSwitcher() {
       onClick={() => {
         setSelected(item);
         i18n.changeLanguage(item.code);
-        console.log('Selected ' + selected?.code);
       }}
       key={item.label}
     >
