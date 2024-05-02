@@ -1,67 +1,72 @@
 import '@/App.css';
 import '@mantine/core/styles.css';
+import '@fontsource-variable/plus-jakarta-sans';
 
 import { MantineProvider } from '@mantine/core';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import React, { useState } from 'react';
-import { useTranslation } from 'react-i18next';
+import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 
-import { Header } from '@/components/Header/Header';
-import { LocaleSwitcher } from '@/components/LocaleSwitcher/LocaleSwitcher';
+import AppLayout from '@/components/AppLayout/AppLayout';
+import PagesLayout from '@/components/PagesLayout/PagesLayout';
+import FAQPage from '@/pages/FAQ/FAQ';
+import HomePage from '@/pages/Home/Home';
+import Ideas from '@/pages/IdeasApp/Ideas';
+import LoginPage from '@/pages/Login/LoginPage';
+import NotFoundPage from '@/pages/NotFound/NotFound';
 
 const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
       staleTime: Infinity,
-      cacheTime: Infinity,
+      // cacheTime: Infinity,
     },
   },
 });
+
+const router = createBrowserRouter([
+  {
+    path: '/',
+    element: <PagesLayout />,
+    children: [
+      {
+        index: true,
+        element: <HomePage />,
+      },
+      {
+        path: 'FAQ',
+        element: <FAQPage />,
+      },
+      {
+        path: 'login',
+        element: <LoginPage />,
+      },
+    ],
+  },
+  {
+    path: '/app',
+    element: <AppLayout />,
+    children: [
+      {
+        index: true,
+        element: <Ideas />,
+      },
+    ],
+  },
+  {
+    path: '*',
+    element: <NotFoundPage />,
+  },
+]);
+
+const theme = {
+  fontFamily: 'Plus Jakarta Sans Variable, sans-serif',
+};
+
 function App() {
-  const [count, setCount] = useState(0);
-  const { t } = useTranslation();
   return (
-    <MantineProvider>
+    <MantineProvider theme={theme}>
       <QueryClientProvider client={queryClient}>
-        <Header />
-        <LocaleSwitcher />
-        <div className="App">
-          <header className="App-header">
-            <p className="header">{t('welcome')}</p>
-            <p className="header">{t('logout')}</p>
-
-            <div className="body">
-              <button onClick={() => setCount((count) => count + 1)}>
-                🪂 Click me : {count}
-              </button>
-
-              <p> Don&apos;t forgot to install Eslint and Prettier in Your Vscode.</p>
-
-              <p>
-                Mess up the code in <code>App.tsx </code> and save the file.
-              </p>
-              <p>
-                <a
-                  className="App-link"
-                  href="https://reactjs.org"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  Learn React
-                </a>
-                {' | '}
-                <a
-                  className="App-link"
-                  href="https://vitejs.dev/guide/features.html"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  Vite Docs
-                </a>
-              </p>
-            </div>
-          </header>
-        </div>
+        <RouterProvider router={router} />
       </QueryClientProvider>
     </MantineProvider>
   );
