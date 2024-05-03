@@ -2,10 +2,11 @@ import { AppShell, Burger, Button, Center, Group, UnstyledButton } from '@mantin
 import { useDisclosure } from '@mantine/hooks';
 import { Outlet } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 import { LocaleSwitcher } from '@/components/LocaleSwitcher/LocaleSwitcher';
+import { ThemeToggle } from '@/components/ThemeToggle/ThemeToggle';
 
-import ChangeThemeButton from '../ChangeThemeButton/ChangeThemeButton';
 import classes from './PagesLayout.module.css';
 const PagesLayout = () => {
   const [opened, { toggle }] = useDisclosure();
@@ -26,13 +27,17 @@ const PagesLayout = () => {
           <Burger opened={opened} onClick={toggle} hiddenFrom="sm" size="sm" />
           <Group justify="space-between" style={{ flex: 1 }}>
             <Group>
-              <h1>Izbri</h1>
-              <ChangeThemeButton />
+              <Link to="/app" className={classes.undecoratedLink}>
+                <h1>Izbri</h1>
+              </Link>
+              <ThemeToggle />
             </Group>
             <div></div> {/* Spacers to center */}
             <div></div>
             <Center inline>
-              <h1 className={classes.title}>AppCache</h1>
+              <Link to="/" className={classes.undecoratedLink}>
+                <h1 className={classes.title}>AppCache</h1>
+              </Link>{' '}
             </Center>
             <Group ml="xl" gap={0} visibleFrom="sm">
               <UnstyledButton

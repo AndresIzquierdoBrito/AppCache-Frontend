@@ -24,3 +24,8 @@
     font-size: rem(32px);
   }
 }
+
+.undecoratedLink {
+  color: inherit;
+  text-decoration: none;
+}

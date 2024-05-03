@@ -1,6 +1,9 @@
-import { AppShell, Burger, Group, Skeleton, Text } from '@mantine/core';
+import { AppShell, Burger, Group, Skeleton } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
-import { Outlet } from 'react-router-dom';
+import { Link, Outlet } from 'react-router-dom';
+
+import { ThemeToggle } from '@/components/ThemeToggle/ThemeToggle';
+import { UserInfo } from '@/components/UserInfo/UserInfo';
 
 const AppLayout = () => {
   const [opened, { toggle }] = useDisclosure();
@@ -8,19 +11,18 @@ const AppLayout = () => {
   return (
     <AppShell
       layout="alt"
-      navbar={{ width: 300, breakpoint: 'sm', collapsed: { mobile: !opened } }}
-      aside={{
-        width: 300,
-        breakpoint: 'md',
-        collapsed: { desktop: false, mobile: true },
-      }}
+      navbar={{ width: 300, breakpoint: 'md', collapsed: { mobile: !opened } }}
       padding="md"
     >
       <AppShell.Navbar p="md">
         <Group>
-          <Burger opened={opened} onClick={toggle} hiddenFrom="sm" size="sm" />
-          <Text>Navbar</Text>
+          <Burger opened={opened} onClick={toggle} hiddenFrom="md" size="sm" />
+          <Link to="/" style={{ textDecoration: 'none', color: 'inherit' }}>
+            <h1>AppCache</h1>
+          </Link>
+          <ThemeToggle />
         </Group>
+        <UserInfo />
         {Array(15)
           .fill(0)
           .map((_, index) => (
@@ -28,8 +30,6 @@ const AppLayout = () => {
           ))}
       </AppShell.Navbar>
       <AppShell.Main>
-        <Burger opened={closed} onClick={toggle} hiddenFrom="sm" size="sm" />
-
         <Outlet />
       </AppShell.Main>
     </AppShell>

@@ -16,7 +16,7 @@ import { useForm } from '@mantine/form';
 import { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 
-import { GoogleButton } from './GoogleButton';
+import { GithubButton, GoogleButton } from '@/components/LoginComponents/SocialButtons';
 
 const LoginPage = (props: PaperProps) => {
   const location = useLocation();
@@ -52,10 +52,12 @@ const LoginPage = (props: PaperProps) => {
           Welcome to AppCache, {type} with
         </Text>
 
-        <Group grow mb="md" mt="md">
-          <GoogleButton radius="xl">Google</GoogleButton>
+        <Group grow mb="sm" mt="md">
+          <GoogleButton radius="md">Continue with Google</GoogleButton>
         </Group>
-
+        <Group grow mb="sm" mt="sm">
+          <GithubButton radius="md">Continue with GitHub</GithubButton>
+        </Group>
         <Divider label="Or continue with email" labelPosition="center" my="lg" />
 
         <form onSubmit={form.onSubmit(() => {})}>
