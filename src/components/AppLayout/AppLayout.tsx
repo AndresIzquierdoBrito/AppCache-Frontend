@@ -1,12 +1,22 @@
 import { AppShell, Burger, Group, Skeleton } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
-import { Link, Outlet } from 'react-router-dom';
+import { useEffect } from 'react';
+import { Link, Outlet, useNavigate } from 'react-router-dom';
 
 import { ThemeToggle } from '@/components/ThemeToggle/ThemeToggle';
 import { UserInfo } from '@/components/UserInfo/UserInfo';
+import { useAuth } from '@/context/AuthContext';
 
 const AppLayout = () => {
   const [opened, { toggle }] = useDisclosure();
+  const { isAuthorized } = useAuth();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (!isAuthorized) {
+      navigate('/login');
+    }
+  }, [isAuthorized, navigate]);
 
   return (
     <AppShell

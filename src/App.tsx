@@ -8,6 +8,7 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 
 import AppLayout from '@/components/AppLayout/AppLayout';
 import PagesLayout from '@/components/PagesLayout/PagesLayout';
+import { AuthProvider } from '@/context/AuthContext';
 import FAQPage from '@/pages/FAQ/FAQ';
 import HomePage from '@/pages/Home/Home';
 import Ideas from '@/pages/IdeasApp/Ideas';
@@ -66,7 +67,9 @@ function App() {
   return (
     <MantineProvider theme={theme}>
       <QueryClientProvider client={queryClient}>
-        <RouterProvider router={router} />
+        <AuthProvider>
+          <RouterProvider router={router} />
+        </AuthProvider>
       </QueryClientProvider>
     </MantineProvider>
   );

@@ -14,14 +14,17 @@ import {
 } from '@mantine/core';
 import { useForm } from '@mantine/form';
 import { useEffect, useState } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 import { GithubButton, GoogleButton } from '@/components/LoginComponents/SocialButtons';
+import { useAuth } from '@/context/AuthContext';
 
 const LoginPage = (props: PaperProps) => {
   const location = useLocation();
+  const navigate = useNavigate();
   const initialType = location.state?.type || 'login';
   const [type, setType] = useState(initialType);
+  const { setAuthorized } = useAuth();
 
   useEffect(() => {
     setType(initialType);
@@ -33,9 +36,7 @@ const LoginPage = (props: PaperProps) => {
   const form = useForm({
     initialValues: {
       email: '',
-      name: '',
       password: '',
-      terms: true,
     },
 
     validate: {
@@ -45,6 +46,28 @@ const LoginPage = (props: PaperProps) => {
     },
   });
 
+  const handleSubmit = async () => {
+    if (!form.validate) {
+      return;
+    }
+
+    const response = await fetch('https://localhost:7156/account/login', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(form.values),
+      credentials: 'include',
+    });
+
+    if (response.ok) {
+      setAuthorized(true);
+      navigate('/app');
+    } else {
+      console.error('Failed to log in');
+    }
+  };
+
   return (
     <Center mt={50} key={location.state?.key}>
       <Paper radius="md" p="xl" withBorder {...props}>
@@ -53,20 +76,27 @@ const LoginPage = (props: PaperProps) => {
         </Text>
 
         <Group grow mb="sm" mt="md">
-          <GoogleButton radius="md">Continue with Google</GoogleButton>
+          <GoogleButton
+            radius="md"
+            onClick={() =>
+              (window.location.href = 'https://localhost:7156/Account/login-google')
+            }
+          >
+            Continue with Google
+          </GoogleButton>
         </Group>
         <Group grow mb="sm" mt="sm">
           <GithubButton radius="md">Continue with GitHub</GithubButton>
         </Group>
         <Divider label="Or continue with email" labelPosition="center" my="lg" />
 
-        <form onSubmit={form.onSubmit(() => {})}>
+        <form onSubmit={form.onSubmit(handleSubmit)}>
           <Stack>
             {type === 'register' && (
               <TextInput
                 label="Name"
                 placeholder="Your name"
-                value={form.values.name}
+                value={form.values.email}
                 onChange={(event) =>
                   form.setFieldValue('name', event.currentTarget.value)
                 }
@@ -101,7 +131,7 @@ const LoginPage = (props: PaperProps) => {
             {type === 'register' && (
               <Checkbox
                 label="I accept terms and conditions"
-                checked={form.values.terms}
+                checked={true}
                 onChange={(event) =>
                   form.setFieldValue('terms', event.currentTarget.checked)
                 }
