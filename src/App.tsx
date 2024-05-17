@@ -66,11 +66,11 @@ const theme = {
 function App() {
   return (
     <MantineProvider theme={theme}>
-      <QueryClientProvider client={queryClient}>
-        <AuthProvider>
+      <AuthProvider>
+        <QueryClientProvider client={queryClient}>
           <RouterProvider router={router} />
-        </AuthProvider>
-      </QueryClientProvider>
+        </QueryClientProvider>
+      </AuthProvider>
     </MantineProvider>
   );
 }

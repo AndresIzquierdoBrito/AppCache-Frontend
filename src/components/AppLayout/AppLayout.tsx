@@ -1,5 +1,6 @@
-import { AppShell, Burger, Group, Skeleton } from '@mantine/core';
+import { AppShell, Burger, Button, Group, Skeleton } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
+import axios from 'axios';
 import { useEffect } from 'react';
 import { Link, Outlet, useNavigate } from 'react-router-dom';
 
@@ -9,7 +10,7 @@ import { useAuth } from '@/context/AuthContext';
 
 const AppLayout = () => {
   const [opened, { toggle }] = useDisclosure();
-  const { isAuthorized } = useAuth();
+  const { setAuthorized, isAuthorized } = useAuth();
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -17,6 +18,21 @@ const AppLayout = () => {
       navigate('/login');
     }
   }, [isAuthorized, navigate]);
+
+  const handleLogout = async () => {
+    try {
+      await axios.post(
+        'https://localhost:7156/Account/logout',
+        {},
+        {
+          withCredentials: true,
+        }
+      );
+      setAuthorized(false);
+    } catch (error) {
+      console.error('Error logging out', error);
+    }
+  };
 
   return (
     <AppShell
@@ -38,6 +54,7 @@ const AppLayout = () => {
           .map((_, index) => (
             <Skeleton key={index} h={28} mt="sm" animate={false} />
           ))}
+        <Button onClick={handleLogout}>Logout</Button>
       </AppShell.Navbar>
       <AppShell.Main>
         <Outlet />

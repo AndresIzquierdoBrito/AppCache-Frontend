@@ -1,15 +1,15 @@
 import { AppShell, Burger, Button, Center, Group, UnstyledButton } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
-import { Outlet } from 'react-router-dom';
-import { useNavigate } from 'react-router-dom';
-import { Link } from 'react-router-dom';
+import { Link, Outlet, useNavigate } from 'react-router-dom';
 
 import { LocaleSwitcher } from '@/components/LocaleSwitcher/LocaleSwitcher';
 import { ThemeToggle } from '@/components/ThemeToggle/ThemeToggle';
+import { useAuth } from '@/context/AuthContext';
 
 import classes from './PagesLayout.module.css';
 const PagesLayout = () => {
   const [opened, { toggle }] = useDisclosure();
+  const { isAuthorized } = useAuth();
   const navigate = useNavigate();
 
   return (
@@ -56,25 +56,30 @@ const PagesLayout = () => {
           </Group>
           <Group px="md">
             <LocaleSwitcher />
-            <Button
-              variant="default"
-              onClick={() =>
-                navigate('/login', {
-                  state: { type: 'login', key: Date.now() },
-                })
-              }
-            >
-              Log in
-            </Button>
-            <Button
-              onClick={() =>
-                navigate('/login', {
-                  state: { type: 'register', key: Date.now() },
-                })
-              }
-            >
-              Sign up
-            </Button>{' '}
+            {isAuthorized ? (
+              <Button onClick={() => navigate('/app')}>Open</Button>
+            ) : (
+              <>
+                <Button
+                  onClick={() =>
+                    navigate('/login', {
+                      state: { type: 'login', key: Date.now() },
+                    })
+                  }
+                >
+                  Log in
+                </Button>
+                <Button
+                  onClick={() =>
+                    navigate('/login', {
+                      state: { type: 'register', key: Date.now() },
+                    })
+                  }
+                >
+                  Sign up
+                </Button>
+              </>
+            )}
           </Group>{' '}
         </Group>
       </AppShell.Header>

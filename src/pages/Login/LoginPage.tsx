@@ -17,7 +17,7 @@ import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 
-import { GithubButton, GoogleButton } from '@/components/LoginComponents/SocialButtons';
+import { GoogleButton } from '@/components/LoginComponents/SocialButtons';
 import { useAuth } from '@/context/AuthContext';
 
 const LoginPage = (props: PaperProps) => {
@@ -112,13 +112,11 @@ const LoginPage = (props: PaperProps) => {
       const loginCredentials = {
         email: form.values.email,
         password: form.values.password,
-      }
+      };
       if (response.status === 200) {
-        const loginResponse = await axios.post(
-          'https://localhost:7156/Account/login',
-          loginCredentials,
-          { withCredentials: true }
-        );
+        await axios.post('https://localhost:7156/Account/login', loginCredentials, {
+          withCredentials: true,
+        });
 
         setAuthorized(true);
       }
