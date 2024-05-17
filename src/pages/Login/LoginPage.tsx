@@ -13,6 +13,7 @@ import {
   TextInput,
 } from '@mantine/core';
 import { useForm } from '@mantine/form';
+import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 
@@ -24,57 +25,121 @@ const LoginPage = (props: PaperProps) => {
   const navigate = useNavigate();
   const initialType = location.state?.type || 'login';
   const [type, setType] = useState(initialType);
-  const { setAuthorized } = useAuth();
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
+  const { isAuthorized, setAuthorized } = useAuth();
 
   useEffect(() => {
     setType(initialType);
   }, [location.key]);
+
+  useEffect(() => {
+    if (isAuthorized) {
+      navigate('/app');
+    }
+  }, [isAuthorized]);
 
   const toggle = () => {
     setType((prevType: string) => (prevType === 'login' ? 'register' : 'login'));
   };
   const form = useForm({
     initialValues: {
+      userName: '',
       email: '',
       password: '',
     },
-
+    // Please validate this someday
     validate: {
+      userName: (val) => (val.length >= 50 ? 'Too long' : null),
       email: (val) => (/^\S+@\S+$/.test(val) ? null : 'Invalid email'),
       password: (val) =>
         val.length <= 6 ? 'Password should include at least 6 characters' : null,
     },
   });
 
-  const handleSubmit = async () => {
-    if (!form.validate) {
-      return;
-    }
+  const handleSubmit = async (event: React.FormEvent) => {
+    event.preventDefault();
 
-    const response = await fetch('https://localhost:7156/account/login', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(form.values),
-      credentials: 'include',
-    });
-
-    if (response.ok) {
-      setAuthorized(true);
-      navigate('/app');
+    if (type === 'register') {
+      handleRegister();
     } else {
-      console.error('Failed to log in');
+      handleLogin();
     }
   };
 
+  const handleLogin = async () => {
+    if (!form.validate()) {
+      return;
+    }
+
+    setLoading(true);
+    setError(null);
+
+    try {
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
+      const response = await axios.post(
+        'https://localhost:7156/account/login',
+        form.values,
+        {
+          withCredentials: true,
+        }
+      );
+
+      setAuthorized(true);
+      navigate('/app');
+    } catch (error: any) {
+      if (error.response && error.response.status === 401) {
+        setError('Wrong credentials');
+      } else {
+        setError('An error occurred');
+      }
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleRegister = async () => {
+    if (!form.validate()) {
+      return;
+    }
+    try {
+      const response = await axios.post(
+        'https://localhost:7156/account/register',
+        form.values,
+        { withCredentials: true }
+      );
+
+      const loginCredentials = {
+        email: form.values.email,
+        password: form.values.password,
+      }
+      if (response.status === 200) {
+        const loginResponse = await axios.post(
+          'https://localhost:7156/Account/login',
+          loginCredentials,
+          { withCredentials: true }
+        );
+
+        setAuthorized(true);
+      }
+    } catch (error: any) {
+      if (error.response && error.response.status === 401) {
+        setError('Wrong credentials');
+      } else {
+        setError('An error occurred');
+      }
+    } finally {
+      setLoading(false);
+    }
+  };
   return (
     <Center mt={50} key={location.state?.key}>
       <Paper radius="md" p="xl" withBorder {...props}>
         <Text size="lg" fw={500}>
           Welcome to AppCache, {type} with
         </Text>
-
+        {loading && <p>Loading...</p>}
+        {error && <p>{error}</p>}
         <Group grow mb="sm" mt="md">
           <GoogleButton
             radius="md"
@@ -82,23 +147,23 @@ const LoginPage = (props: PaperProps) => {
               (window.location.href = 'https://localhost:7156/Account/login-google')
             }
           >
-            Continue with Google
+            Google
           </GoogleButton>
         </Group>
-        <Group grow mb="sm" mt="sm">
+        {/* <Group grow mb="sm" mt="sm">
           <GithubButton radius="md">Continue with GitHub</GithubButton>
-        </Group>
+        </Group> */}
         <Divider label="Or continue with email" labelPosition="center" my="lg" />
 
-        <form onSubmit={form.onSubmit(handleSubmit)}>
+        <form onSubmit={handleSubmit}>
           <Stack>
             {type === 'register' && (
               <TextInput
                 label="Name"
-                placeholder="Your name"
-                value={form.values.email}
+                placeholder="Arthur Dent"
+                value={form.values.userName}
                 onChange={(event) =>
-                  form.setFieldValue('name', event.currentTarget.value)
+                  form.setFieldValue('userName', event.currentTarget.value)
                 }
                 radius="md"
               />
@@ -107,7 +172,7 @@ const LoginPage = (props: PaperProps) => {
             <TextInput
               required
               label="Email"
-              placeholder="hello@mantine.dev"
+              placeholder="example@domain.com"
               value={form.values.email}
               onChange={(event) => form.setFieldValue('email', event.currentTarget.value)}
               error={form.errors.email && 'Invalid email'}
