@@ -1,4 +1,4 @@
-import { AppShell, Burger, Button, Group, Skeleton } from '@mantine/core';
+import { AppShell, Burger, Button, Group, rem, Skeleton } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
 import axios from 'axios';
 import { useEffect } from 'react';
@@ -49,12 +49,14 @@ const AppLayout = () => {
           <ThemeToggle />
         </Group>
         <UserInfo />
-        {Array(15)
+        {Array(5)
           .fill(0)
           .map((_, index) => (
             <Skeleton key={index} h={28} mt="sm" animate={false} />
           ))}
-        <Button onClick={handleLogout}>Logout</Button>
+        <Button mt={rem(20)} onClick={handleLogout}>
+          Logout
+        </Button>
       </AppShell.Navbar>
       <AppShell.Main>
         <Outlet />

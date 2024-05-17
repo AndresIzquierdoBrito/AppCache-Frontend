@@ -1,50 +1,67 @@
 import axios from 'axios';
 import { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 
 import { DndListHandle } from '@/components/IdeasComponents/DndList/DndListHandle';
 import { useAuth } from '@/context/AuthContext';
 
-const Ideas = () => {
-  const [ideas, setIdeas] = useState([]);
-  const navigate = useNavigate();
+interface Idea {
+  title: string;
+  description: string;
+}
+
+const Ideas: React.FC = () => {
+  const [ideas, setIdeas] = useState<Idea[]>([]);
   const { isAuthorized } = useAuth();
 
   useEffect(() => {
-    const fetchIdeas = async () => {
-      if (!isAuthorized) {
-        return;
-      }
+    if (!isAuthorized) {
+      return;
+    }
+    axios
+      .get('https://localhost:7156/api/Ideas', { withCredentials: true })
+      .then((response) => setIdeas(response.data));
+  }, []);
 
-      try {
-        const response = await axios.get('https://localhost:7156/api/ideas', {
-          withCredentials: true,
-        });
+  const addIdea = (newIdea: Idea) => {
+    // Optimistically add the new idea to the local state
+    setIdeas((prevIdeas) => [...prevIdeas, newIdea]);
 
-        if (response.status === 200) {
-          setIdeas(response.data);
-        } else {
-          console.error('Failed to fetch ideas');
-        }
-      } catch (error) {
-        console.error('Failed to fetch ideas', error);
-      }
-    };
-
-    fetchIdeas();
-  }, [navigate]);
+    // Send the new idea to the server
+    axios
+      .post<Idea>('https://localhost:7156/api/Ideas', newIdea, { withCredentials: true })
+      .then((response) => {
+        // Replace the temporary idea with the one returned by the server
+        setIdeas((prevIdeas) =>
+          prevIdeas.map((idea) => (idea === newIdea ? response.data : idea))
+        );
+      })
+      .catch((error) => {
+        // Remove the temporary idea from the local state and show an error message
+        setIdeas((prevIdeas) => prevIdeas.filter((idea) => idea !== newIdea));
+        console.error('Error adding idea:', error);
+      });
+  };
 
   console.log(ideas);
 
   return (
     <div>
       <h1>Ideas</h1>
-      {/* <ul>
-        {ideas.map((idea) => (
-          <li key={idea.id}>{idea.title}</li>
+      <ul>
+        {ideas.map((idea, index) => (
+          <li key={index}>{idea.title}</li>
         ))}
-      </ul> */}
+      </ul>
       <DndListHandle />
+      <form
+        onSubmit={(event) => {
+          event.preventDefault();
+          addIdea({ title: 'New Idea', description: 'This is a new idea.' });
+        }}
+      >
+        {/* form fields for title and description */}
+        <button type="submit">Add Idea</button>
+      </form>
     </div>
   );
 };

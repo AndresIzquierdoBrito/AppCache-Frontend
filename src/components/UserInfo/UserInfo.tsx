@@ -10,7 +10,7 @@ export function UserInfo() {
         mx="auto"
       />
       <Text ta="center" fz="lg" fw={500} mt="md">
-        Jane Fingerlicker
+        Andrew
       </Text>
       <Text ta="center" c="dimmed" fz="sm">
         andres.izbri@gmail.com

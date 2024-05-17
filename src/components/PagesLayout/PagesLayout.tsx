@@ -46,12 +46,6 @@ const PagesLayout = () => {
               >
                 FAQ
               </UnstyledButton>
-              <UnstyledButton
-                className={classes.control}
-                onClick={() => navigate('/faq')}
-              >
-                Support
-              </UnstyledButton>
             </Group>
           </Group>
           <Group px="md">
