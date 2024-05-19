@@ -1,5 +1,5 @@
 import { FaqAccordion } from '@/components/FAQComponents/FaqAccordion/FaqAccordion';
-import FaqWithHeader from '@/components/FAQComponents/FaqPageHeader/FaqWithHeader';
+import FaqWithHeader from '@/components/FAQComponents/FAQPageHeader/FaqWithHeader';
 
 const FAQPage = () => {
   return (
