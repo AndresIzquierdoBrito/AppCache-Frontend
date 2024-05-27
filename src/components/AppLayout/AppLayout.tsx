@@ -6,10 +6,10 @@ import { useTranslation } from 'react-i18next';
 import { Link, Outlet, useNavigate } from 'react-router-dom';
 
 import { CategoryCard } from '@/components/IdeasComponents/CategoryCard/CategoryCard';
+import { LocaleSwitcher } from '@/components/LocaleSwitcher/LocaleSwitcher';
 import { ThemeToggle } from '@/components/ThemeToggle/ThemeToggle';
 import { UserInfo } from '@/components/UserInfo/UserInfo';
 import { useAuth } from '@/context/AuthContext';
-import { LocaleSwitcher } from '@/components/LocaleSwitcher/LocaleSwitcher';
 
 const AppLayout = () => {
   const [opened, { toggle }] = useDisclosure();

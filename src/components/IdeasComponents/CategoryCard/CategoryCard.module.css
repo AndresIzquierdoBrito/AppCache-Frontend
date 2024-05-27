@@ -12,7 +12,6 @@
     rgba(255, 189, 75, 1) 55%,
     rgba(255, 255, 255, 1) 100%
   );
-
 }
 .title {
   font-family: var(--mantine-font-family);
