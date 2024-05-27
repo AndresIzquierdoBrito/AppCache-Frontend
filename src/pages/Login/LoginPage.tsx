@@ -20,7 +20,6 @@ import { useLocation, useNavigate } from 'react-router-dom';
 
 import { GoogleButton } from '@/components/LoginComponents/SocialButtons';
 import { GithubButton } from '@/components/LoginComponents/SocialButtons';
-
 import { useAuth } from '@/context/AuthContext';
 
 const LoginPage = (props: PaperProps) => {

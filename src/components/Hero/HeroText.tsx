@@ -1,9 +1,9 @@
 import { Button, Container, Text, Title } from '@mantine/core';
 import { useTranslation } from 'react-i18next';
+import { useNavigate } from 'react-router-dom';
 
 import { Dots } from './Dots';
 import classes from './HeroText.module.css';
-import { useNavigate } from 'react-router-dom';
 
 export function HeroText() {
   const { t } = useTranslation();
