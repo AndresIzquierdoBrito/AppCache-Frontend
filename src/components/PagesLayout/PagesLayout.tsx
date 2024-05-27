@@ -36,12 +36,12 @@ const PagesLayout = () => {
           <Burger opened={opened} onClick={toggle} hiddenFrom="sm" size="sm" />
           <Group justify="space-between" style={{ flex: 1 }}>
             <Group>
-              <Link to="/app" className={classes.undecoratedLink}>
-                <h1>Izbri</h1>
+              <Link to="https://izbri.com" className={classes.undecoratedLink}>
+                <h1 className={classes.title}>Izbri</h1>
               </Link>
               <ThemeToggle />
             </Group>
-            <div></div> {/* Spacers to center */}
+            <div></div>
             <div></div>
             <Center inline>
               <Link to="/" className={classes.undecoratedLink}>

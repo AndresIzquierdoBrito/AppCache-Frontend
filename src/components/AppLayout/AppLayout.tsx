@@ -25,7 +25,7 @@ const AppLayout = () => {
   const handleLogout = async () => {
     try {
       await axios.post(
-        `${import.meta.env.VITE_API_URL}/Account/logout`,
+        `${import.meta.env.VITE_API_URL}/api/Account/logout`,
         {},
         {
           withCredentials: true,

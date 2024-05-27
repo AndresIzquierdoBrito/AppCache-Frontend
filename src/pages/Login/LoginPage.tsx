@@ -19,6 +19,8 @@ import { useTranslation } from 'react-i18next';
 import { useLocation, useNavigate } from 'react-router-dom';
 
 import { GoogleButton } from '@/components/LoginComponents/SocialButtons';
+import { GithubButton } from '@/components/LoginComponents/SocialButtons';
+
 import { useAuth } from '@/context/AuthContext';
 
 const LoginPage = (props: PaperProps) => {
@@ -80,7 +82,7 @@ const LoginPage = (props: PaperProps) => {
     try {
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
       const response = await axios.post(
-        `${import.meta.env.VITE_API_URL}/account/login`,
+        `${import.meta.env.VITE_API_URL}/api/account/login`,
         form.values,
         {
           withCredentials: true,
@@ -106,7 +108,7 @@ const LoginPage = (props: PaperProps) => {
     }
     try {
       const response = await axios.post(
-        `${import.meta.env.VITE_API_URL}/account/register`,
+        `${import.meta.env.VITE_API_URL}/api/account/register`,
         form.values,
         { withCredentials: true }
       );
@@ -117,7 +119,7 @@ const LoginPage = (props: PaperProps) => {
       };
       if (response.status === 200) {
         await axios.post(
-          `${import.meta.env.VITE_API_URL}/account/login`,
+          `${import.meta.env.VITE_API_URL}/api/account/login`,
           loginCredentials,
           {
             withCredentials: true,
@@ -148,15 +150,15 @@ const LoginPage = (props: PaperProps) => {
           <GoogleButton
             radius="md"
             onClick={() =>
-              (window.location.href = `${import.meta.env.VITE_API_URL}/Account/login-google`)
+              (window.location.href = `${import.meta.env.VITE_API_URL}/api/Account/login-google`)
             }
           >
             Google
           </GoogleButton>
         </Group>
-        {/* <Group grow mb="sm" mt="sm">
-          <GithubButton radius="md">Continue with GitHub</GithubButton>
-        </Group> */}
+        <Group grow mb="sm" mt="sm">
+          <GithubButton radius="md">GitHub</GithubButton>
+        </Group>
         <Divider label={t('loginPage.dividerLabel')} labelPosition="center" my="lg" />
 
         <form onSubmit={handleSubmit}>

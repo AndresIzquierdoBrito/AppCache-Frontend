@@ -3,9 +3,11 @@ import { useTranslation } from 'react-i18next';
 
 import { Dots } from './Dots';
 import classes from './HeroText.module.css';
+import { useNavigate } from 'react-router-dom';
 
 export function HeroText() {
   const { t } = useTranslation();
+  const navigate = useNavigate();
 
   return (
     <Container className={classes.wrapper} size={1400}>
@@ -30,10 +32,16 @@ export function HeroText() {
         </Container>
 
         <div className={classes.controls}>
-          <Button className={classes.control} size="lg" variant="default" color="gray">
+          <Button
+            className={classes.control}
+            size="lg"
+            variant="default"
+            color="gray"
+            onClick={() => navigate('/login')}
+          >
             {t('homepage.heroText.tryItNow')}
           </Button>
-          <Button className={classes.control} size="lg">
+          <Button className={classes.control} size="lg" onClick={() => navigate('/faq')}>
             {t('homepage.heroText.learnMore')}
           </Button>
         </div>
