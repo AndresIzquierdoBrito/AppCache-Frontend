@@ -21,7 +21,7 @@ interface DndListHandleProps {
 }
 
 export function DndListHandle({ ideasArray }: DndListHandleProps) {
-  const [state, handlers] = useListState(ideasArray);
+  const [, handlers] = useListState(ideasArray);
   const [ideas, setIdeas] = useState(ideasArray);
 
   useEffect(() => {
@@ -67,7 +67,7 @@ export function DndListHandle({ ideasArray }: DndListHandleProps) {
         console.log(newIdeas);
         setIdeas(newIdeas);
         try {
-          await axios.put('https://localhost:7156/api/Ideas/reorder', newIdeas, {
+          await axios.put(`${import.meta.env.VITE_API_URL}/api/Ideas/reorder`, newIdeas, {
             withCredentials: true,
           });
         } catch (error) {

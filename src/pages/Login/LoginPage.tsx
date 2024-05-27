@@ -148,7 +148,7 @@ const LoginPage = (props: PaperProps) => {
           <GoogleButton
             radius="md"
             onClick={() =>
-              (window.location.href = `${process.env.REACT_APP_API_URL}/Account/login-google`)
+              (window.location.href = `${import.meta.env.VITE_API_URL}/Account/login-google`)
             }
           >
             Google
@@ -163,7 +163,7 @@ const LoginPage = (props: PaperProps) => {
           <Stack>
             {type === 'register' && (
               <TextInput
-                label="Name"
+                label={t('loginPage.userNameLabel')}
                 placeholder="Arthur Dent"
                 value={form.values.userName}
                 onChange={(event) =>
@@ -175,31 +175,29 @@ const LoginPage = (props: PaperProps) => {
 
             <TextInput
               required
-              label="Email"
-              placeholder="example@domain.com"
+              label={t('loginPage.emailLabel')}
+              placeholder={t('loginPage.emailPlaceholder')}
               value={form.values.email}
               onChange={(event) => form.setFieldValue('email', event.currentTarget.value)}
-              error={form.errors.email && 'Invalid email'}
+              error={form.errors.email && t('loginPage.invalidEmail')}
               radius="md"
             />
 
             <PasswordInput
               required
-              label="Password"
-              placeholder="Your password"
+              label={t('loginPage.passwordLabel')}
+              placeholder={t('loginPage.passwordPlaceholder')}
               value={form.values.password}
               onChange={(event) =>
                 form.setFieldValue('password', event.currentTarget.value)
               }
-              error={
-                form.errors.password && 'Password should include at least 6 characters'
-              }
+              error={form.errors.password && t('loginPage.invalidPassword')}
               radius="md"
             />
 
             {type === 'register' && (
               <Checkbox
-                label="I accept terms and conditions"
+                label={t('loginPage.termsLabel')}
                 checked={true}
                 onChange={(event) =>
                   form.setFieldValue('terms', event.currentTarget.checked)
@@ -217,8 +215,8 @@ const LoginPage = (props: PaperProps) => {
               size="xs"
             >
               {type === 'register'
-                ? 'Already have an account? Login'
-                : "Don't have an account? Register"}
+                ? t('loginPage.alreadyHaveAccount')
+                : t('loginPage.noAccount')}
             </Anchor>
             <Button type="submit" radius="xl">
               {(type === 'register' ? 'Register' : 'Login') as string}

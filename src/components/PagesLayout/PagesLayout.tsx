@@ -79,7 +79,7 @@ const PagesLayout = () => {
                     })
                   }
                 >
-                  Sign up
+                  {t('header.signup')}
                 </Button>
               </>
             )}

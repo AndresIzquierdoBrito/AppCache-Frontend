@@ -51,16 +51,30 @@
     "contactUs": "Contáctanos"
   },
   "loginPage": {
-    "welcome": "Bienvenido a AppCache, {type} con",
+    "welcome": "Bienvenido a AppCache, accede con",
     "loading": "Cargando...",
     "wrongCredentials": "Credenciales incorrectas",
     "errorOccurred": "Ocurrió un error",
     "googleButton": "Google",
-    "dividerLabel": "O continuar con correo electrónico"
+    "dividerLabel": "O continuar con correo electrónico",
+    "userNameLabel": "Nombre de usuario",
+    "emailLabel": "Correo electrónico",
+    "emailPlaceholder": "ejemplo@dominio.com",
+    "invalidEmail": "Correo electrónico inválido",
+    "passwordLabel": "Contraseña",
+    "passwordPlaceholder": "Tu contraseña",
+    "invalidPassword": "La contraseña debe incluir al menos 6 caracteres",
+    "termsLabel": "Acepto los términos y condiciones",
+    "alreadyHaveAccount": "¿Ya tienes una cuenta? Inicia sesión",
+    "noAccount": "¿No tienes una cuenta? Regístrate"
   },
   "app": {
     "layout": {
-      "logout": "Cerrar sesión"
-    }
+      "logout": "Cerrar sesión",
+      "categories": {
+        "allIdeas": "Todas"
+      }
+    },
+    "addIdea": "Añadir idea de ejemplo"
   }
 }

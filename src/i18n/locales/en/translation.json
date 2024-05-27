@@ -54,15 +54,29 @@
     "contactUs": "Contact us"
   },
   "loginPage": {
-    "welcome": "Welcome to AppCache, {type} with",
+    "welcome": "Welcome to AppCache, access with",
     "loading": "Loading...",
     "wrongCredentials": "Wrong credentials",
     "errorOccurred": "An error occurred",
-    "dividerLabel": "Or continue with email"
+    "dividerLabel": "Or continue with email",
+    "userNameLabel": "Username",
+    "emailLabel": "Email",
+    "emailPlaceholder": "example@domain.com",
+    "invalidEmail": "Invalid email",
+    "passwordLabel": "Password",
+    "passwordPlaceholder": "Your password",
+    "invalidPassword": "Password should include at least 6 characters",
+    "termsLabel": "I accept terms and conditions",
+    "alreadyHaveAccount": "Already have an account? Login",
+    "noAccount": "Don't have an account? Register"
   },
   "app": {
     "layout": {
-      "logout": "Log out"
-    }
+      "logout": "Log out",
+      "categories": {
+        "allIdeas": "All ideas"
+      }
+    },
+    "addIdea": "Add idea example"
   }
 }

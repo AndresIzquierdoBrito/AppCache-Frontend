@@ -1,13 +1,15 @@
-import { AppShell, Burger, Button, Group, rem, Skeleton } from '@mantine/core';
+import { AppShell, Burger, Button, Center, Group, rem, Skeleton } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
 import axios from 'axios';
 import { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Link, Outlet, useNavigate } from 'react-router-dom';
 
+import { CategoryCard } from '@/components/IdeasComponents/CategoryCard/CategoryCard';
 import { ThemeToggle } from '@/components/ThemeToggle/ThemeToggle';
 import { UserInfo } from '@/components/UserInfo/UserInfo';
 import { useAuth } from '@/context/AuthContext';
+import { LocaleSwitcher } from '@/components/LocaleSwitcher/LocaleSwitcher';
 
 const AppLayout = () => {
   const [opened, { toggle }] = useDisclosure();
@@ -23,7 +25,7 @@ const AppLayout = () => {
   const handleLogout = async () => {
     try {
       await axios.post(
-        'https://localhost:7156/Account/logout',
+        `${import.meta.env.VITE_API_URL}/Account/logout`,
         {},
         {
           withCredentials: true,
@@ -50,16 +52,21 @@ const AppLayout = () => {
           <ThemeToggle />
         </Group>
         <UserInfo />
+        <CategoryCard />
         {Array(5)
           .fill(0)
           .map((_, index) => (
             <Skeleton key={index} h={28} mt="sm" animate={false} />
           ))}
-        <Button mt={rem(20)} onClick={handleLogout}>
+        <Center bottom={0} mt={rem(10)}>
+          <LocaleSwitcher />
+        </Center>
+        <Button mt={rem(10)} onClick={handleLogout}>
           {t('app.layout.logout')}
         </Button>
       </AppShell.Navbar>
       <AppShell.Main>
+        <Burger opened={opened} onClick={toggle} hiddenFrom="md" size="sm" />
         <Outlet />
       </AppShell.Main>
     </AppShell>
