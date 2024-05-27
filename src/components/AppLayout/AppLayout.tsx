@@ -2,6 +2,7 @@ import { AppShell, Burger, Button, Group, rem, Skeleton } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
 import axios from 'axios';
 import { useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
 import { Link, Outlet, useNavigate } from 'react-router-dom';
 
 import { ThemeToggle } from '@/components/ThemeToggle/ThemeToggle';
@@ -12,7 +13,7 @@ const AppLayout = () => {
   const [opened, { toggle }] = useDisclosure();
   const { setAuthorized, isAuthorized } = useAuth();
   const navigate = useNavigate();
-
+  const { t } = useTranslation();
   useEffect(() => {
     if (!isAuthorized) {
       navigate('/login');
@@ -55,7 +56,7 @@ const AppLayout = () => {
             <Skeleton key={index} h={28} mt="sm" animate={false} />
           ))}
         <Button mt={rem(20)} onClick={handleLogout}>
-          Logout
+          {t('app.layout.logout')}
         </Button>
       </AppShell.Navbar>
       <AppShell.Main>

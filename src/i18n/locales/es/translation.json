@@ -1,4 +1,66 @@
 {
-  "welcome": "Bienvenido",
-  "logout": "Cerrar sesion"
+  "homepage": {
+    "title": "Inicio",
+    "description": "Esta es la página de inicio",
+    "heroText": {
+      "title": "Seguro e interactivo",
+      "highlight": "Almacenamiento de Ideas",
+      "subtitle": "para tus futuros proyectos",
+      "description": "Almacena y gestiona de forma segura tus ideas para futuros proyectos y aplicaciones con una interfaz fácil e interactiva. Nunca más pierdas una gran idea.",
+      "tryItNow": "Pruébalo ahora",
+      "learnMore": "Aprende más"
+    },
+    "features": {
+      "badge": "Tus Ideas, Aseguradas",
+      "title": "Almacena y Gestiona Tus Ideas con Facilidad",
+      "description": "Nuestra plataforma proporciona un entorno seguro e interactivo para que almacenes y gestiones tus ideas para futuros proyectos y aplicaciones. Con características robustas y fáciles de usar, nunca más perderás una gran idea.",
+      "cards": [
+        {
+          "title": "Interfaz Interactiva",
+          "description": "Nuestra interfaz fácil de usar facilita la adición, gestión y organización de tus ideas. La funcionalidad de arrastrar y soltar te permite priorizar tus ideas como veas conveniente."
+        },
+        {
+          "title": "Almacenamiento Seguro",
+          "description": "Tus ideas se almacenan de forma segura en nuestra base de datos. Puedes estar tranquilo sabiendo que tus ideas para futuros proyectos y aplicaciones están seguras."
+        },
+        {
+          "title": "Sin Terceros",
+          "description": "Respetamos tu privacidad. Tus ideas son tuyas y solo tuyas. No compartimos tus datos con terceros."
+        }
+      ]
+    }
+  },
+  "header": {
+    "login": "Inicar sesión",
+    "signup": "Regístrate",
+    "open": "Acceder"
+  },
+  "faq": {
+    "categories": [
+      {
+        "label": "Soporte al Cliente"
+      },
+      {
+        "label": "Guías de Usuario"
+      },
+      {
+        "label": "Preguntas de Ventas"
+      }
+    ],
+    "title": "Preguntas Frecuentes",
+    "contactUs": "Contáctanos"
+  },
+  "loginPage": {
+    "welcome": "Bienvenido a AppCache, {type} con",
+    "loading": "Cargando...",
+    "wrongCredentials": "Credenciales incorrectas",
+    "errorOccurred": "Ocurrió un error",
+    "googleButton": "Google",
+    "dividerLabel": "O continuar con correo electrónico"
+  },
+  "app": {
+    "layout": {
+      "logout": "Cerrar sesión"
+    }
+  }
 }

@@ -17,7 +17,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     const checkAuth = async () => {
       try {
         const response = await axios.get(
-          'https://localhost:7156/account/isAuthenticated',
+          `${process.env.REACT_APP_API_URL}/account/isAuthenticated`,
           { withCredentials: true }
         );
         if (response.data === true) {

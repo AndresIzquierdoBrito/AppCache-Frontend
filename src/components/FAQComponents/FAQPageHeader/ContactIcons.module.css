@@ -8,8 +8,8 @@
   margin-right: var(--mantine-spacing-md);
   background-image: linear-gradient(
     135deg,
-    var(--mantine-color-blue-4) 0%,
-    var(--mantine-color-blue-6) 100%
+    var(--mantine-color-orange-4) 0%,
+    var(--mantine-color-orange-6) 100%
   );
 }
 

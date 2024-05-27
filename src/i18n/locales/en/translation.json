@@ -1,4 +1,68 @@
 {
   "welcome": "Welcome",
-  "logout": "Logout"
+  "logout": "Logout",
+  "login": "Login",
+  "homepage": {
+    "title": "Home",
+    "description": "This is the homepage",
+    "heroText": {
+      "title": "Secure and interactive",
+      "highlight": "Idea Storage",
+      "subtitle": "for your future projects",
+      "description": "Safely store and manage your future project and application ideas with an easy and interactive interface. Never lose a great idea again.",
+      "tryItNow": "Try it now",
+      "learnMore": "Learn more"
+    },
+    "features": {
+      "badge": "Your Ideas, Secured",
+      "title": "Store and Manage Your Ideas with Ease",
+      "description": "Our platform provides a secure and interactive environment for you to store and manage your future project and application ideas. With an easy-to-use and robust features, you'll never lose a great idea again.",
+      "cards": [
+        {
+          "title": "Interactive Interface",
+          "description": "Our user-friendly interface makes it easy to add, manage, and organize your ideas. Drag and drop functionality allows you to prioritize your ideas as you see fit."
+        },
+        {
+          "title": "Secure Storage",
+          "description": "Your ideas are stored securely in our database. You can rest assured knowing that your future project and application ideas are safe and sound."
+        },
+        {
+          "title": "No Third Parties",
+          "description": "We respect your privacy. Your ideas are yours and yours alone. We do not share your data with any third parties."
+        }
+      ]
+    }
+  },
+  "header": {
+    "login": "Log in",
+    "signup": "Sign up",
+    "open": "Open"
+  },
+  "faq": {
+    "categories": [
+      {
+        "label": "Customer Support"
+      },
+      {
+        "label": "User Guides"
+      },
+      {
+        "label": "Sales Questions"
+      }
+    ],
+    "title": "Frequently Asked Questions",
+    "contactUs": "Contact us"
+  },
+  "loginPage": {
+    "welcome": "Welcome to AppCache, {type} with",
+    "loading": "Loading...",
+    "wrongCredentials": "Wrong credentials",
+    "errorOccurred": "An error occurred",
+    "dividerLabel": "Or continue with email"
+  },
+  "app": {
+    "layout": {
+      "logout": "Log out"
+    }
+  }
 }

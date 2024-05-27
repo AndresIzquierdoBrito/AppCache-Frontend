@@ -59,11 +59,26 @@ const router = createBrowserRouter([
   },
 ]);
 
-const theme = {
-  fontFamily: 'Plus Jakarta Sans Variable, sans-serif',
-};
-
 function App() {
+  const theme = {
+    fontFamily: 'Plus Jakarta Sans Variable, sans-serif',
+    colors: {
+      'galaxy-blue': [
+        '#e3e4ff',
+        '#b2b3ff',
+        '#7f85ff',
+        '#4d5aff',
+        '#1d1dfe',
+        '#1605e5',
+        '#1700b3',
+        '#190081',
+        '#150050',
+        '#0b0020',
+      ] as const,
+    },
+    primaryColor: 'orange',
+  };
+
   return (
     <MantineProvider theme={theme}>
       <AuthProvider>

@@ -2,9 +2,6 @@ import { Accordion, Container, Title } from '@mantine/core';
 
 import classes from './FaqAccordion.module.css';
 
-const placeholder =
-  'It can’t help but hear a pin drop from over half a mile away, so it lives deep in the mountains where there aren’t many people or Pokémon.It was born from sludge on the ocean floor. In a sterile environment, the germs within its body can’t multiply, and it dies.It has no eyeballs, so it can’t see. It checks its surroundings via the ultrasonic waves it emits from its mouth.';
-
 export function FaqAccordion() {
   return (
     <Container size="sm" className={classes.wrapper}>
@@ -13,33 +10,30 @@ export function FaqAccordion() {
       </Title>
 
       <Accordion variant="separated">
-        <Accordion.Item className={classes.item} value="reset-password">
-          <Accordion.Control>How can I reset my password?</Accordion.Control>
-          <Accordion.Panel>{placeholder}</Accordion.Panel>
+        <Accordion.Item className={classes.item} value="add-idea">
+          <Accordion.Control>How can I add a new idea?</Accordion.Control>
+          <Accordion.Panel>
+            To add a new idea, simply click on the &quot;Add Idea&quot; button and fill in
+            the title and description of your idea. Once you&apos;re done,
+            &quot;Submit&quot; to save your idea.
+          </Accordion.Panel>
         </Accordion.Item>
 
-        <Accordion.Item className={classes.item} value="another-account">
-          <Accordion.Control>Can I create more that one account?</Accordion.Control>
-          <Accordion.Panel>{placeholder}</Accordion.Panel>
+        <Accordion.Item className={classes.item} value="edit-idea">
+          <Accordion.Control>How can I edit an existing idea?</Accordion.Control>
+          <Accordion.Panel>
+            To edit an existing idea, click on the idea you want to edit. This will open
+            up the idea details where you can make changes to the title and description.
+            Don&apos;t forget to save your changes!
+          </Accordion.Panel>
         </Accordion.Item>
 
-        <Accordion.Item className={classes.item} value="newsletter">
-          <Accordion.Control>
-            How can I subscribe to monthly newsletter?
-          </Accordion.Control>
-          <Accordion.Panel>{placeholder}</Accordion.Panel>
-        </Accordion.Item>
-
-        <Accordion.Item className={classes.item} value="credit-card">
-          <Accordion.Control>
-            Do you store credit card information securely?
-          </Accordion.Control>
-          <Accordion.Panel>{placeholder}</Accordion.Panel>
-        </Accordion.Item>
-
-        <Accordion.Item className={classes.item} value="payment">
-          <Accordion.Control>What payment systems to you work with?</Accordion.Control>
-          <Accordion.Panel>{placeholder}</Accordion.Panel>
+        <Accordion.Item className={classes.item} value="delete-idea">
+          <Accordion.Control>How can I delete an idea?</Accordion.Control>
+          <Accordion.Panel>
+            To delete an idea, click on the idea you want to delete and then click on
+            &quot;Delete&quot; button. Please note that this action is irreversible.
+          </Accordion.Panel>
         </Accordion.Item>
       </Accordion>
     </Container>

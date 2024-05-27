@@ -1,5 +1,14 @@
-import { AppShell, Burger, Button, Center, Group, UnstyledButton } from '@mantine/core';
+import {
+  AppShell,
+  Burger,
+  Button,
+  Center,
+  Group,
+  Stack,
+  UnstyledButton,
+} from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
+import { useTranslation } from 'react-i18next';
 import { Link, Outlet, useNavigate } from 'react-router-dom';
 
 import { LocaleSwitcher } from '@/components/LocaleSwitcher/LocaleSwitcher';
@@ -11,7 +20,7 @@ const PagesLayout = () => {
   const [opened, { toggle }] = useDisclosure();
   const { isAuthorized } = useAuth();
   const navigate = useNavigate();
-
+  const { t } = useTranslation();
   return (
     <AppShell
       header={{ height: 60 }}
@@ -48,7 +57,7 @@ const PagesLayout = () => {
               </UnstyledButton>
             </Group>
           </Group>
-          <Group px="md">
+          <Group px="md" visibleFrom="sm">
             <LocaleSwitcher />
             {isAuthorized ? (
               <Button onClick={() => navigate('/app')}>Open</Button>
@@ -61,7 +70,7 @@ const PagesLayout = () => {
                     })
                   }
                 >
-                  Log in
+                  {t('header.login')}
                 </Button>
                 <Button
                   onClick={() =>
@@ -79,10 +88,46 @@ const PagesLayout = () => {
       </AppShell.Header>
 
       <AppShell.Navbar py="md" px={4}>
-        <UnstyledButton className={classes.control}>EE</UnstyledButton>
-        <UnstyledButton className={classes.control}>Blog</UnstyledButton>
-        <UnstyledButton className={classes.control}>Contacts</UnstyledButton>
-        <UnstyledButton className={classes.control}>Support</UnstyledButton>
+        <Stack px="md">
+          <UnstyledButton
+            className={classes.control}
+            onClick={() => {
+              navigate('/faq');
+              toggle();
+            }}
+          >
+            FAQ
+          </UnstyledButton>
+          {isAuthorized ? (
+            <Button onClick={() => navigate('/app')}>Open</Button>
+          ) : (
+            <>
+              <Button
+                onClick={() => {
+                  navigate('/login', {
+                    state: { type: 'login', key: Date.now() },
+                  });
+                  toggle();
+                }}
+              >
+                {t('header.login')}
+              </Button>
+              <Button
+                onClick={() => {
+                  navigate('/login', {
+                    state: { type: 'register', key: Date.now() },
+                  });
+                  toggle();
+                }}
+              >
+                {t('header.signup')}
+              </Button>
+            </>
+          )}
+          <Center>
+            <LocaleSwitcher />
+          </Center>
+        </Stack>
       </AppShell.Navbar>
 
       <AppShell.Main>

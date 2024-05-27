@@ -6,6 +6,7 @@ import {
   Title,
   UnstyledButton,
 } from '@mantine/core';
+import { useTranslation } from 'react-i18next';
 
 import { ContactIconsList } from './ContactIcons';
 import classes from './FaqWithHeader.module.css';
@@ -27,17 +28,17 @@ const categories = [
       'https://images.unsplash.com/photo-1543286386-713bdd548da4?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80',
   },
 ];
-
 const FaqWithHeader = () => {
-  const items = categories.map((category) => (
+  const { t } = useTranslation();
+  const items = categories.map((category, index) => (
     <UnstyledButton
       style={{ backgroundImage: `url(${category.image})` }}
       className={classes.categoryCard}
-      key={category.label}
+      key={t(`faq.categories.${index}.label`)}
     >
       <Overlay color="#000" opacity={0.6} zIndex={1} />
       <Text size="xl" ta="center" fw={700} className={classes.categoryLabel}>
-        {category.label}
+        {t(`faq.categories.${index}.label`)}
       </Text>
     </UnstyledButton>
   ));
@@ -46,17 +47,15 @@ const FaqWithHeader = () => {
     <Container className={classes.wrapper} size="lg">
       <div className={classes.header}>
         <div>
-          <Title className={classes.title}>Frequently Asked Questions</Title>
+          <Title className={classes.title}> {t('faq.title')}</Title>
           <Title className={classes.titleOverlay} role="presentation">
             FAQ
           </Title>
         </div>
-
         <div className={classes.contact}>
           <Text size="xl" fw={500} className={classes.contactTitle}>
-            Contact us
+            {t('faq.contactUs')}
           </Text>
-
           <ContactIconsList />
         </div>
       </div>

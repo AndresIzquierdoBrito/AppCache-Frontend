@@ -15,6 +15,7 @@ import {
 import { useForm } from '@mantine/form';
 import axios from 'axios';
 import { useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { useLocation, useNavigate } from 'react-router-dom';
 
 import { GoogleButton } from '@/components/LoginComponents/SocialButtons';
@@ -26,8 +27,9 @@ const LoginPage = (props: PaperProps) => {
   const initialType = location.state?.type || 'login';
   const [type, setType] = useState(initialType);
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(null);
+  const [error, setError] = useState<string | null>(null);
   const { isAuthorized, setAuthorized } = useAuth();
+  const { t } = useTranslation();
 
   useEffect(() => {
     setType(initialType);
@@ -48,7 +50,7 @@ const LoginPage = (props: PaperProps) => {
       email: '',
       password: '',
     },
-    // Please validate this someday
+    //TODO Please validate this someday
     validate: {
       userName: (val) => (val.length >= 50 ? 'Too long' : null),
       email: (val) => (/^\S+@\S+$/.test(val) ? null : 'Invalid email'),
@@ -78,7 +80,7 @@ const LoginPage = (props: PaperProps) => {
     try {
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
       const response = await axios.post(
-        'https://localhost:7156/account/login',
+        `${import.meta.env.VITE_API_URL}/account/login`,
         form.values,
         {
           withCredentials: true,
@@ -104,7 +106,7 @@ const LoginPage = (props: PaperProps) => {
     }
     try {
       const response = await axios.post(
-        'https://localhost:7156/account/register',
+        `${import.meta.env.VITE_API_URL}/account/register`,
         form.values,
         { withCredentials: true }
       );
@@ -114,9 +116,13 @@ const LoginPage = (props: PaperProps) => {
         password: form.values.password,
       };
       if (response.status === 200) {
-        await axios.post('https://localhost:7156/Account/login', loginCredentials, {
-          withCredentials: true,
-        });
+        await axios.post(
+          `${import.meta.env.VITE_API_URL}/account/login`,
+          loginCredentials,
+          {
+            withCredentials: true,
+          }
+        );
 
         setAuthorized(true);
       }
@@ -134,15 +140,15 @@ const LoginPage = (props: PaperProps) => {
     <Center mt={50} key={location.state?.key}>
       <Paper radius="md" p="xl" withBorder {...props}>
         <Text size="lg" fw={500}>
-          Welcome to AppCache, {type} with
+          {t('loginPage.welcome', { type })}
         </Text>
-        {loading && <p>Loading...</p>}
-        {error && <p>{error}</p>}
+        {loading && <p> {loading && <p>{t('loginPage.loading')}</p>}</p>}
+        {error && <p>{t('loginPage.wrongCredentials')}</p>}
         <Group grow mb="sm" mt="md">
           <GoogleButton
             radius="md"
             onClick={() =>
-              (window.location.href = 'https://localhost:7156/Account/login-google')
+              (window.location.href = `${process.env.REACT_APP_API_URL}/Account/login-google`)
             }
           >
             Google
@@ -151,7 +157,7 @@ const LoginPage = (props: PaperProps) => {
         {/* <Group grow mb="sm" mt="sm">
           <GithubButton radius="md">Continue with GitHub</GithubButton>
         </Group> */}
-        <Divider label="Or continue with email" labelPosition="center" my="lg" />
+        <Divider label={t('loginPage.dividerLabel')} labelPosition="center" my="lg" />
 
         <form onSubmit={handleSubmit}>
           <Stack>

@@ -1,9 +1,12 @@
 import { Button, Container, Text, Title } from '@mantine/core';
+import { useTranslation } from 'react-i18next';
 
 import { Dots } from './Dots';
 import classes from './HeroText.module.css';
 
 export function HeroText() {
+  const { t } = useTranslation();
+
   return (
     <Container className={classes.wrapper} size={1400}>
       <Dots className={classes.dots} style={{ left: 0, top: 0 }} />
@@ -13,26 +16,25 @@ export function HeroText() {
 
       <div className={classes.inner}>
         <Title className={classes.title}>
-          Automated AI{' '}
+          {t('homepage.heroText.title')}{' '}
           <Text component="span" className={classes.highlight} inherit>
-            code reviews
+            {t('homepage.heroText.highlight')}
           </Text>{' '}
-          for any stack
+          {t('homepage.heroText.subtitle')}
         </Title>
 
         <Container p={0} size={600}>
           <Text size="lg" c="dimmed" className={classes.description}>
-            Build more reliable software with AI companion. AI is also trained to detect
-            lazy developers who do nothing and just complain on Twitter.
+            {t('homepage.heroText.description')}
           </Text>
         </Container>
 
         <div className={classes.controls}>
           <Button className={classes.control} size="lg" variant="default" color="gray">
-            Book a demo
+            {t('homepage.heroText.tryItNow')}
           </Button>
           <Button className={classes.control} size="lg">
-            Purchase a license
+            {t('homepage.heroText.learnMore')}
           </Button>
         </div>
       </div>
