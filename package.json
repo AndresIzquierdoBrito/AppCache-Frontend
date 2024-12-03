@@ -19,7 +19,7 @@
     "@mantine/hooks": "^7.8.0",
     "@mantinex/dev-icons": "^1.0.2",
     "@tanstack/react-query": "^5.29.2",
-    "axios": "^1.6.8",
+    "axios": "^1.7.4",
     "dotenv": "^16.4.5",
     "i18next": "^23.11.2",
     "i18next-browser-languagedetector": "^7.2.1",
