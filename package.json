@@ -53,7 +53,7 @@
     "pre-commit": "^1.2.2",
     "prettier": "^3.2.5",
     "typescript": "^5.4.5",
-    "vite": "^5.2.9"
+    "vite": "^5.4.11"
   },
   "pre-commit": "lint",
   "license": "MIT"
